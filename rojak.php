@@ -1,8 +1,8 @@
 <?php
 /**
- * Rojak Core - A WordPress theme development framework.
+ * Rojak - A WordPress theme development framework.
  *
- * Rojak Core is a framework for developing WordPress themes.  The framework allows theme developers
+ * Rojak is a framework for developing WordPress themes.  The framework allows theme developers
  * to quickly build themes without having to handle all of the "logic" behind the theme or having to
  * code complex functionality for features that are often needed in themes.  The framework does these
  * things for developers to allow them to get back to what matters the most:  developing and designing
@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License along with this program; if not,
  * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
- * @package   RojakCore
+ * @package   Rojak
  * @version   0.9.0
  * @author    Fastbooking <studioweb-fb@fastbooking.net>
  * @copyright Copyright (c) 2016, Fastbooking

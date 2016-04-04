@@ -2,7 +2,7 @@
 /**
  * Functions for handling WPML related features
  *
- * @package    RojakCore
+ * @package    Rojak
  * @subpackage Includes
  * @author     Fastbooking <studioweb-fb@fastbooking.net>
  * @copyright  Copyright (c) 2016, Fastbooking

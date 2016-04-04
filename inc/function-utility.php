@@ -3,7 +3,7 @@
  * Additional helper functions that the framework or themes may use.  The functions in this file are functions
  * that don't really have a home within any other parts of the framework.
  *
- * @package    RojakCore
+ * @package    Rojak
  * @subpackage Includes
  * @author     Fastbooking <studioweb-fb@fastbooking.net>
  * @copyright  Copyright (c) 2016, Fastbooking

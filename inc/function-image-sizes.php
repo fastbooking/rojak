@@ -3,7 +3,7 @@
  * Images Sizes
  *
  *
- * @package    RojakCore
+ * @package    Rojak
  * @subpackage Includes
  * @author     Fastbooking <studioweb-fb@fastbooking.net>
  * @copyright  Copyright (c) 2016, Fastbooking
