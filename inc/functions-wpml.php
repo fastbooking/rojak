@@ -19,7 +19,7 @@
  * @param  string  $post_type
  * @return int
  */
-function rojak_get_default_lang_post_id( $post_id, $post_type = 'page' ) {
+function rojak_get_primary_lang_post_id( $post_id, $post_type = 'page' ) {
 
 	global $sitepress;
 	$default_language = $sitepress->get_default_language();

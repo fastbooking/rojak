@@ -65,9 +65,9 @@ if ( ! class_exists( 'Rojak' ) ) {
 			add_action( 'after_setup_theme', array( $this, 'constants'     ), -95 );
 			add_action( 'after_setup_theme', array( $this, 'core'          ), -95 );
 			add_action( 'after_setup_theme', array( $this, 'theme_support' ),  12 );
-			add_action( 'after_setup_theme', array( $this, 'includes'      ),  13 );
-			add_action( 'after_setup_theme', array( $this, 'extensions'    ),  14 );
-			add_action( 'after_setup_theme', array( $this, 'admin'         ),  95 );
+			// add_action( 'after_setup_theme', array( $this, 'includes'      ),  13 );
+			// add_action( 'after_setup_theme', array( $this, 'extensions'    ),  14 );
+			// add_action( 'after_setup_theme', array( $this, 'admin'         ),  95 );
 		}
 
 		/**

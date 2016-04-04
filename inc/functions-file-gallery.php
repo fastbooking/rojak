@@ -26,7 +26,7 @@ function rojak_get_post_attachments( $post_id, $post_type = 'page' ) {
 		'order'          => 'ASC',
 		'orderby'        => 'menu_order',
 		'post_type'      => 'attachment',
-		'post_parent'    => rojak_get_default_lang_post_id( $post_id, $post_type ),
+		'post_parent'    => rojak_get_primary_lang_post_id( $post_id, $post_type ),
 		'post_mime_type' => 'image',
 		'post_status'    => null
 	);
@@ -52,7 +52,7 @@ function rojak_has_page_attachments( $post_id, $media_tag = '', $post_type = 'pa
 		'order'          => 'ASC',
 		'orderby'        => 'menu_order',
 		'post_type'      => 'attachment',
-		'post_parent'    => rojak_get_default_lang_post_id( $post_id, $post_type ),
+		'post_parent'    => rojak_get_primary_lang_post_id( $post_id, $post_type ),
 		'post_mime_type' => 'image',
 		'post_status'    => null
 	);

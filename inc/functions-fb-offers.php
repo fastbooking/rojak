@@ -48,9 +48,9 @@ function rojak_get_fb_widget_url( $args = array() ) {
 		'divdest'  => null,
 		'lg'       => $language,
 		'nb'       => 1,
-		'cta'      => __( 'Check Availability', 'rojak-core' ),
-		'ctam'     => __( 'More info', 'rojak-core' ),
-		'apd'      => __( 'From',      'rojak-core' ),
+		'cta'      => __( 'Check Availability', 'rojak' ),
+		'ctam'     => __( 'More info', 'rojak' ),
+		'apd'      => __( 'From',      'rojak' ),
 		'pn'       => '',
 		'js_flag'  => 1,
 		'pb_flag'  => 1,
@@ -64,9 +64,15 @@ function rojak_get_fb_widget_url( $args = array() ) {
 	);
 	$args = wp_parse_args( $args, $defaults );
 
-	$url = "http://hotelsitecontents.fastbooking.com/router.php";
-	$url = esc_url( $url ) . '?' . http_build_query( $args );
+	// Another layer for add_filter to update $args
+	$filter_args = apply_filters( 'rojak_fb_widget_args', false );
+	$args = wp_parse_args( $args, $filter_args );
 
-	return 'FB.CrossCom.consume( "' . $url . '", "' . $args['divdest'] . '" )' . "\n";
+	$default_base_url = "http://hotelsitecontents.fastbooking.com/router.php";
+	$base_url 				= apply_filters( 'rojak_fb_widget_base_url', $default_base_url );
+
+	$base_url = esc_url( $base_url ) . '?' . http_build_query( $args );
+
+	return 'FB.CrossCom.consume( "' . $base_url . '", "' . $args['divdest'] . '" )' . "\n";
 
 }
