@@ -121,6 +121,7 @@ if ( ! class_exists( 'Rojak' ) ) {
 
 
 			// Load the functions files.
+			require_once( ROJAK_INC . 'functions-content.php'         );
 			require_once( ROJAK_INC . 'functions-fb-offers.php'    );
 			require_once( ROJAK_INC . 'functions-file-gallery.php' );
 			require_once( ROJAK_INC . 'functions-image-sizes.php'  );
