@@ -126,6 +126,7 @@ if ( ! class_exists( 'Rojak' ) ) {
 			require_once( ROJAK_INC . 'functions-image-sizes.php'  );
 			require_once( ROJAK_INC . 'functions-utility.php'      );
 			require_once( ROJAK_INC . 'functions-wpml.php'         );
+			require_once( ROJAK_INC . 'functions-pods.php'         );
 
 			// Load the class files.
 			// require_once( ROJAK_INC . 'class-media-meta.php'         );

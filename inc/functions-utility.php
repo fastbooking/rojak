@@ -130,4 +130,14 @@ function rojak_get_menu_name( $theme_location ) {
 	return $menu_obj->name;
 }
 
-
+/**
+ * Print
+ *
+ * @since  0.9.0
+ * @access public
+ * @param  any   $print_this
+ * @return void
+ */
+function rojak_print( $print_this )	{
+	echo '<pre style="position:fixed; width:1000px; height:800px; background-color:#000; color:#fff; z-index:9999; top:20px; right:0; overflow:scroll; font-size:12px; ">' . print_r( $print_this, true ) . '</pre>';
+}
