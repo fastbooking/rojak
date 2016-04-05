@@ -65,6 +65,7 @@ if ( ! class_exists( 'Rojak' ) ) {
 			add_action( 'after_setup_theme', array( $this, 'constants'     ), -95 );
 			add_action( 'after_setup_theme', array( $this, 'core'          ), -95 );
 			add_action( 'after_setup_theme', array( $this, 'theme_support' ),  12 );
+
 			// add_action( 'after_setup_theme', array( $this, 'includes'      ),  13 );
 			// add_action( 'after_setup_theme', array( $this, 'extensions'    ),  14 );
 			// add_action( 'after_setup_theme', array( $this, 'admin'         ),  95 );
@@ -121,13 +122,14 @@ if ( ! class_exists( 'Rojak' ) ) {
 
 
 			// Load the functions files.
-			require_once( ROJAK_INC . 'functions-content.php'         );
+			require_once( ROJAK_INC . 'functions-content.php'      );
 			require_once( ROJAK_INC . 'functions-fb-offers.php'    );
 			require_once( ROJAK_INC . 'functions-file-gallery.php' );
 			require_once( ROJAK_INC . 'functions-image-sizes.php'  );
 			require_once( ROJAK_INC . 'functions-utility.php'      );
 			require_once( ROJAK_INC . 'functions-wpml.php'         );
 			require_once( ROJAK_INC . 'functions-pods.php'         );
+
 
 			// Load the class files.
 			// require_once( ROJAK_INC . 'class-media-meta.php'         );
@@ -165,6 +167,8 @@ if ( ! class_exists( 'Rojak' ) ) {
 		 * @return void
 		 */
 		public function theme_support() {
+
+			require_if_theme_supports( 'rojak-templates', ROJAK_INC . 'functions-templates.php' );
 
 			// Automatically add <title> to head.
 			// add_theme_support( 'title-tag' );

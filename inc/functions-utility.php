@@ -57,13 +57,18 @@ function rojak_str_contains( $str, $keyword ) {
  */
 function rojak_get_page_id_by_tpl( $tpl_name ) {
 	$page_id = false;
-	$pages = get_posts(array(
+	$args = array(
 		'post_type'  => 'page',
 		'meta_key'   => '_wp_page_template',
 		'meta_value' => $tpl_name,
-		// 'meta_value' => rojak_tpl_path( $tpl_name, 'php' ),
 		'suppress_filters' => 0
-	));
+	);
+
+	if ( current_theme_supports( 'rojak-templates' ) ) {
+		$args['meta_value'] = rojak_tpl_get_path( $tpl_name, 'php' );
+	}
+
+	$pages = get_posts( $args );
 
 	if ( count( $pages ) == 1 ) {
 		$first = true;
@@ -140,4 +145,27 @@ function rojak_get_menu_name( $theme_location ) {
  */
 function rojak_print( $print_this )	{
 	echo '<pre style="position:fixed; width:1000px; height:800px; background-color:#000; color:#fff; z-index:9999; top:20px; right:0; overflow:scroll; font-size:12px; ">' . print_r( $print_this, true ) . '</pre>';
+}
+
+
+/**
+ * Get value from pods post type, if result not in array and is single value,
+ * convert into array with key [value] so can return into object
+ *
+ * @since  0.9.0
+ * @access public
+ * @param  int     $post_id
+ * @param  string  $field_name
+ * @return object
+ */
+function rojak_get_post_meta_object( $post_id, $field_name ) {
+	$data = get_post_meta( $post_id, $field_name );
+	$data = $data[0];
+	if(!is_array($data)) {
+		$convert_data['value'] = $data;
+		return (object) $convert_data;
+	}
+	else {
+		return (object) $data;
+	}
 }
