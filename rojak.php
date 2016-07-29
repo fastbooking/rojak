@@ -170,6 +170,10 @@ if ( ! class_exists( 'Rojak' ) ) {
 
 			require_if_theme_supports( 'rojak-templates', ROJAK_INC . 'functions-templates.php' );
 
+			require_if_theme_supports( 'rojak-assets-async', ROJAK_INC . 'functions-assets-async.php' );
+
+			require_if_theme_supports( 'rojak-assets-timestamp', ROJAK_INC . 'functions-assets-timestamp.php' );
+
 			// Automatically add <title> to head.
 			// add_theme_support( 'title-tag' );
 

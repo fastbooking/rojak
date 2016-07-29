@@ -31,20 +31,50 @@ function rojak_empty_array( $arr ) {
 }
 
 /**
- * Check if string contains $keyword
+ * Check if string contains $needle
  *
  * @since  0.9.0
  * @access public
- * @param  string   $str
- * @param  string   $keyword
+ * @param  string   $haystack
+ * @param  string   $needle
  * @return bool
  */
-function rojak_str_contains( $str, $keyword ) {
-	if ( strpos( $str, $keyword ) !== false ) {
+function rojak_str_contains( $haystack, $needle ) {
+	if ( strpos( $haystack, $needle ) !== false ) {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
+}
+
+/**
+ * Check if string starts with $needle
+ *
+ * @since  0.9.0
+ * @access public
+ * @param  string   $haystack
+ * @param  string   $needle
+ * @return bool
+ */
+function rojak_str_starts_with( $haystack, $needle ) {
+	$length = strlen($needle);
+	return (substr($haystack, 0, $length) === $needle);
+}
+
+/**
+ * Check if string ends with $needle
+ *
+ * @since  0.9.0
+ * @access public
+ * @param  string   $haystack
+ * @param  string   $needle
+ * @return bool
+ */
+function rojak_str_ends_with( $haystack, $needle ) {
+	$length = strlen($needle);
+	if ($length == 0) {
+		return true;
+	}
+	return (substr($haystack, -$length) === $needle);
 }
 
 /**
@@ -101,9 +131,9 @@ function rojak_get_parent_page_id( $page_id ) {
 		$ancestors = get_post_ancestors( $page->ID );
 		$root = count( $ancestors ) - 1;
 		return $ancestors[$root];
-	} else {
-		return $page->ID;
 	}
+
+	return false;
 }
 
 /**
@@ -168,4 +198,18 @@ function rojak_get_post_meta_object( $post_id, $field_name ) {
 	else {
 		return (object) $data;
 	}
+}
+
+/**
+ * Logs passed parameter to console.
+ *
+ * @since  0.9.0
+ * @access public
+ * @param  any   $data
+ * @return void
+ */
+function rojak_console( $data )	{
+	echo '<script>';
+	echo 'console.log('. json_encode( $data ) .')';
+	echo '</script>';
 }

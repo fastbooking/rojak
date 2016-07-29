@@ -15,17 +15,30 @@
  *
  * @since  0.9.0
  * @access public
- * @param  array   $args
+ * @param  string $string
+ * @param  int    $count
  * @return void
  */
-function rojak_limit_words( $string, $word_limit = 40, $suffix = ' &hellip;' ){
-	$words = explode( ' ', wp_strip_all_tags( do_shortcode( $string ) ), ( $word_limit + 1 ) );
-	if( count( $words ) > $word_limit ) {
-		array_pop( $words );
-
-		$s = implode( ' ', $words );
-		return ( strlen( $string ) == strlen( $s ) ) ? $string : $s.$suffix;
+function rojak_get_first_words($string, $count = 20 ) {
+	if (ICL_LANGUAGE_CODE !== 'en') {
+		return rojak_get_first_chars($string, $count * 4 );
 	}
+
+	preg_match( "~(?:\w+(?:\W+|$)){0,$count}~", html_entity_decode(strip_tags($string)), $matches);
+	return rtrim($matches[0]).(str_word_count($string) >= $count - 1 ? '&hellip;' : '');
+}
+
+/**
+ * Limit the number of words returned in a given string
+ *
+ * @since  0.9.0
+ * @access public
+ * @param  string $string
+ * @param  int    $count
+ * @return void
+ */
+function rojak_get_first_chars($string, $count = 100 ) {
+	return mb_substr(strip_tags($string), 0, $count).(mb_strlen($string) >= ($count - 1) ? '&hellip;' : '');
 }
 
 /**
@@ -33,17 +46,18 @@ function rojak_limit_words( $string, $word_limit = 40, $suffix = ' &hellip;' ){
  *
  * @since  0.9.0
  * @access public
- * @param  int   $post_id
- * @param  int   $length
+ * @param  string $post_excerpt
+ * @param  string $post_content
+ * @param  int    $length
  * @return string|html
  */
-function rojak_get_excerpt( $post_id, $length = 22 ) {
-	$entry_post    = get_post( $post_id );
-	$entry_excerpt = apply_filters( 'the_excerpt', get_post_field( 'post_excerpt', $post_id ) );
+function rojak_get_excerpt( $post_excerpt, $post_content, $length = 22 ) {
+	$entry_excerpt = apply_filters('the_excerpt', $post_excerpt);
 	if ( empty( $entry_excerpt ) ) {
-		$entry_excerpt = apply_filters( 'the_content', $entry_post->post_content );
+		$entry_excerpt = apply_filters( 'the_content', $post_content );
 	}
-	$entry_excerpt_cut = rojak_limit_words( $entry_excerpt, $length );
+	// $entry_excerpt_cut = fb_limit_words( $entry_excerpt, $length );
+	$entry_excerpt_cut = rojak_get_first_words( $entry_excerpt, $length );
 	if ( !empty( $entry_excerpt_cut ) ) {
 		$entry_excerpt = apply_filters( 'the_content', $entry_excerpt_cut );
 	}

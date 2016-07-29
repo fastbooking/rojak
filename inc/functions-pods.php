@@ -23,14 +23,10 @@
  */
 function rojak_get_post_ids_from_pods_field( $post_id, $cpt, $cpt_field ) {
 	if ( ! empty( $post_id ) ) {
-		$cpt_pod   = pods( $cpt, $post_id );
-		$cpt_field = $cpt_pod->field( $cpt_field );
-		$posts_by_ids = array();
-		if ( !empty( $cpt_field ) && !rojak_empty_array( $cpt_field ) ) {
-			foreach( $cpt_field as $apost ) {
-				array_push($posts_by_ids, $apost['ID']);
-			}
-			return $posts_by_ids;
+		$post_meta = get_post_meta( $post_id );
+		$post_meta = $post_meta[ $cpt_field ];
+		if ( !empty( $post_meta ) && !rojak_empty_array( $post_meta ) ) {
+			return $post_meta;
 		}
 	}
 	return false;
