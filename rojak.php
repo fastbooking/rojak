@@ -129,32 +129,9 @@ if ( ! class_exists( 'Rojak' ) ) {
 			require_once( ROJAK_INC . 'functions-utility.php'      );
 			require_once( ROJAK_INC . 'functions-wpml.php'         );
 			require_once( ROJAK_INC . 'functions-pods.php'         );
+			require_once( ROJAK_INC . 'functions-google.php'       );
+			require_once( ROJAK_INC . 'functions-json.php'         );
 
-
-			// Load the class files.
-			// require_once( ROJAK_INC . 'class-media-meta.php'         );
-			// require_once( ROJAK_INC . 'class-media-meta-factory.php' );
-			// require_once( ROJAK_INC . 'class-media-grabber.php'      );
-
-			// Load the functions files.
-			// require_once( ROJAK_INC . 'functions-attr.php'      );
-			// require_once( ROJAK_INC . 'functions-context.php'   );
-			// require_once( ROJAK_INC . 'functions-i18n.php'      );
-			// require_once( ROJAK_INC . 'functions-customize.php' );
-			// require_once( ROJAK_INC . 'functions-filters.php'   );
-			// require_once( ROJAK_INC . 'functions-head.php'      );
-			// require_once( ROJAK_INC . 'functions-meta.php'      );
-			// require_once( ROJAK_INC . 'functions-sidebars.php'  );
-			// require_once( ROJAK_INC . 'functions-scripts.php'   );
-			// require_once( ROJAK_INC . 'functions-styles.php'    );
-			// require_once( ROJAK_INC . 'functions-utility.php'   );
-
-			// Load the template files.
-			// require_once( ROJAK_INC . 'template.php'          );
-			// require_once( ROJAK_INC . 'template-comments.php' );
-			// require_once( ROJAK_INC . 'template-general.php'  );
-			// require_once( ROJAK_INC . 'template-media.php'    );
-			// require_once( ROJAK_INC . 'template-post.php'     );
 		}
 
 		/**

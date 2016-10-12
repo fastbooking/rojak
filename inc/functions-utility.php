@@ -31,6 +31,22 @@ function rojak_empty_array( $arr ) {
 }
 
 /**
+ * Check if object is empty
+ *
+ * @since  0.9.0
+ * @access public
+ * @param  object $obj
+ * @return bool
+ */
+function rojak_empty_object( $obj ) {
+	$arr = (array) $obj;
+	if ( ! rojak_empty_array( $arr ) ) {
+		return false;
+	}
+	return true;
+}
+
+/**
  * Check if string contains $needle
  *
  * @since  0.9.0
@@ -208,8 +224,20 @@ function rojak_get_post_meta_object( $post_id, $field_name ) {
  * @param  any   $data
  * @return void
  */
-function rojak_console( $data )	{
-	echo '<script>';
-	echo 'console.log('. json_encode( $data ) .')';
-	echo '</script>';
+function rojak_console( $data, $public = false ) {
+	if ( $public == true || is_user_logged_in() ) {
+		echo '<script>';
+		echo 'console.log('. json_encode( $data ) .')';
+		echo '</script>';
+	}
+}
+
+/**
+ * Replaces array_column 
+ *
+ */
+function rojak_array_column( $array,$column_name ) {
+	return array_map( function( $element ) use( $column_name ) { 
+		return $element->{$column_name}; 
+	}, $array);
 }

@@ -182,19 +182,23 @@ function rojak_tpl_page_react_js( $name, $path ) {
 	$react_bundle     = 'react-bundle';
 	$react_bundle_ext = "-{$react_bundle}.js";
 	if ( is_file( $path . $react_bundle_ext ) ) {
-		do_action('rojak_tpl_before_react_js');
-		wp_dequeue_script(    'react' );
-		wp_deregister_script( 'react' );
-		wp_register_script(   'react', '//cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react' .$GLOBALS['rojak_templates_minify']. '.js', array(), '15.2.1', true );
-		wp_enqueue_script(    'react' );
-		do_action('rojak_tpl_after_react_js');
+		// [jes]: injecting react and react dom separately creates
+		// issue with included react components
+		// will investigate further
+		// -------------------------------------------------------------
+		// do_action('rojak_tpl_before_react_js');
+		// wp_dequeue_script(    'react' );
+		// wp_deregister_script( 'react' );
+		// wp_register_script(   'react', '//cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react' .$GLOBALS['rojak_templates_minify']. '.js', array(), '15.2.1', true );
+		// wp_enqueue_script(    'react' );
+		// do_action('rojak_tpl_after_react_js');
 
-		do_action('rojak_tpl_before_react_dom_js');
-		wp_dequeue_script(    'react-dom' );
-		wp_deregister_script( 'react-dom' );
-		wp_register_script(   'react-dom', '//cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom' .$GLOBALS['rojak_templates_minify']. '.js', array(), '15.2.1', true );
-		wp_enqueue_script(    'react-dom' );
-		do_action('rojak_tpl_after_react_dom_js');
+		// do_action('rojak_tpl_before_react_dom_js');
+		// wp_dequeue_script(    'react-dom' );
+		// wp_deregister_script( 'react-dom' );
+		// wp_register_script(   'react-dom', '//cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom' .$GLOBALS['rojak_templates_minify']. '.js', array(), '15.2.1', true );
+		// wp_enqueue_script(    'react-dom' );
+		// do_action('rojak_tpl_after_react_dom_js');
 
 		do_action('rojak_tpl_before_page_react_bundle_js');
 		wp_enqueue_script( $name . $react_bundle, ROJAK_PARENT_URI . rojak_tpl_get_path( $name, $react_bundle_ext ), array(), '', true  );
