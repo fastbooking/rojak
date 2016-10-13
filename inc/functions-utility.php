@@ -12,13 +12,21 @@
  */
 
 /**
- * Check if array is empty
- *
- * @since  0.9.0
- * @access public
- * @param  array   $arr
- * @return bool
- */
+* @api{} Array IsEmpty
+* @apiName ArrayIsEmpty
+* @apiGroup Array
+* @apiVersion 1.0.0
+* @apiDescription Checks if array fields are empty
+*
+* Refer to http://php.net/manual/en/function.array-column.php
+*
+* @apiParam {Array} array Array to be checked
+*
+* @apiExample {php} Example Usage
+*    rojak_console( array( 'name' => 'John Doe' ) );
+* @apiSuccessExample {php} Response:
+*    false
+*/
 function rojak_empty_array( $arr ) {
 	if ( is_array( $arr ) ) {
 		foreach ( $arr as $elm ) {
@@ -217,13 +225,20 @@ function rojak_get_post_meta_object( $post_id, $field_name ) {
 }
 
 /**
- * Logs passed parameter to console.
- *
- * @since  0.9.0
- * @access public
- * @param  any   $data
- * @return void
- */
+* @api{} Print To Console
+* @apiName PrintToConsole
+* @apiGroup Print
+* @apiVersion 1.0.0
+* @apiDescription Prints data to window console
+*
+* Refer to http://php.net/manual/en/function.array-column.php
+*
+* @apiParam {Mixed} data The data to be shown on console
+* @apiParam {Boolean} public If set to true, logs will not be shown for non-login users
+*
+* @apiExample {php} Example Usage
+*      rojak_console( array( 'name' => 'John Doe' ) );
+*/
 function rojak_console( $data, $public = false ) {
 	if ( $public == true || is_user_logged_in() ) {
 		echo '<script>';
@@ -233,9 +248,20 @@ function rojak_console( $data, $public = false ) {
 }
 
 /**
- * Replaces array_column 
- *
- */
+* @api{} Array Column
+* @apiName ArrayColumn
+* @apiGroup Array
+* @apiVersion 1.0.0
+* @apiDescription Alternate to array_column since it does not work with < PHP5.5
+*
+* Refer to http://php.net/manual/en/function.array-column.php
+*
+* @apiParam {Array} array A multi-dimensional array or an array of objects from which to pull a column of values from.
+* @apiParam {Mixed} column_name The column of values to return.
+*
+* @apiExample {php} Example Usage
+*      $first_names = array_column($records, 'first_name');
+*/
 function rojak_array_column( $array,$column_name ) {
 	return array_map( function( $element ) use( $column_name ) { 
 		return $element->{$column_name}; 
