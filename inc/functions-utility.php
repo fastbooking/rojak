@@ -12,20 +12,18 @@
  */
 
 /**
-* @api{} Array IsEmpty
-* @apiName ArrayIsEmpty
+* @api{} Empty Array
+* @apiName EmptyArray
 * @apiGroup Array
 * @apiVersion 1.0.0
-* @apiDescription Checks if array fields are empty
+* @apiDescription Checks if array is empty
 *
-* Refer to http://php.net/manual/en/function.array-column.php
-*
-* @apiParam {Array} array Array to be checked
+* @apiParam {Array} arr Array to be checked
 *
 * @apiExample {php} Example Usage
-*    rojak_console( array( 'name' => 'John Doe' ) );
-* @apiSuccessExample {php} Response:
-*    false
+* 	if ( rojak_empty_array( $array ) ) {
+* 		...
+* 	}
 */
 function rojak_empty_array( $arr ) {
 	if ( is_array( $arr ) ) {
@@ -39,13 +37,19 @@ function rojak_empty_array( $arr ) {
 }
 
 /**
- * Check if object is empty
- *
- * @since  0.9.0
- * @access public
- * @param  object $obj
- * @return bool
- */
+* @api{} Empty Object
+* @apiName EmptyObject
+* @apiGroup Array
+* @apiVersion 1.0.0
+* @apiDescription Check if object is empty
+*
+* @apiParam {Object} obj Object to be checked
+*
+* @apiExample {php} Example Usage
+* 	if ( rojak_empty_object( $obj ) ) {
+* 		...
+* 	}
+*/
 function rojak_empty_object( $obj ) {
 	$arr = (array) $obj;
 	if ( ! rojak_empty_array( $arr ) ) {
@@ -201,17 +205,22 @@ function rojak_print( $print_this )	{
 	echo '<pre style="position:fixed; width:1000px; height:800px; background-color:#000; color:#fff; z-index:9999; top:20px; right:0; overflow:scroll; font-size:12px; ">' . print_r( $print_this, true ) . '</pre>';
 }
 
-
 /**
- * Get value from pods post type, if result not in array and is single value,
- * convert into array with key [value] so can return into object
- *
- * @since  0.9.0
- * @access public
- * @param  int     $post_id
- * @param  string  $field_name
- * @return object
- */
+* @api{} Get Post Meta Object
+* @apiName GetPostMetaObject
+* @apiGroup Post
+* @apiVersion 1.0.0
+* @apiDescription Post meta as object instead of array
+*
+* Get value from pods post type, if result not in array and is single value,
+* convert into array with key [value] so can return into object
+*
+* @apiParam {Integer} post_id Post ID
+* @apiParam {String} field_name Custom field name
+*
+* @apiExample {php} Example Usage
+*    rojak_get_post_meta_object( $post->ID, 'miles_page' );
+*/
 function rojak_get_post_meta_object( $post_id, $field_name ) {
 	$data = get_post_meta( $post_id, $field_name );
 	$data = $data[0];
@@ -245,25 +254,4 @@ function rojak_console( $data, $public = false ) {
 		echo 'console.log('. json_encode( $data ) .')';
 		echo '</script>';
 	}
-}
-
-/**
-* @api{} Array Column
-* @apiName ArrayColumn
-* @apiGroup Array
-* @apiVersion 1.0.0
-* @apiDescription Alternate to array_column since it does not work with < PHP5.5
-*
-* Refer to http://php.net/manual/en/function.array-column.php
-*
-* @apiParam {Array} array A multi-dimensional array or an array of objects from which to pull a column of values from.
-* @apiParam {Mixed} column_name The column of values to return.
-*
-* @apiExample {php} Example Usage
-*      $first_names = array_column($records, 'first_name');
-*/
-function rojak_array_column( $array,$column_name ) {
-	return array_map( function( $element ) use( $column_name ) { 
-		return $element->{$column_name}; 
-	}, $array);
 }

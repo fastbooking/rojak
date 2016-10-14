@@ -89,7 +89,6 @@ function rojak_get_placeholder_image( $args = array() ) {
 
 	$defaults = array(
 		'txtsize'  => 30,
-		'txt'      => __( 'Santika', 'santika' ),
 		'w'        => 200,
 		'h'        => 200,
 		'bg'       => null,

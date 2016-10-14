@@ -11,12 +11,22 @@
  */
 
 /**
- * Set the default options
- *
- * @since  0.9.0
- * @access public
- * @return array
- */
+* @api{} Get Default Options
+* @apiName FgGetOptions
+* @apiGroup FileGallery
+* @apiVersion 1.0.0
+* @apiDescription Set the default options
+*
+* @apiExample {php} Example Usage
+* 	$fg_options = rojak_fg_get_options();
+*
+* @apiSuccessExample {php} Return value:
+* 	array(
+* 		'media_tag' => 'slideshow',
+* 		'post_type' => 'page',
+* 		'post_id'   => $post->ID,
+* 	);
+*/
 function rojak_fg_get_options() {
 	global $post;
 	return array(
@@ -27,18 +37,30 @@ function rojak_fg_get_options() {
 }
 
 /**
- * Get attachments that have 'slideshow' as media tag
- * If there is no attachments with 'slideshow' media tag
- * It will look to its primary language. See below conditions in order:
- * 		1. Current post of current language
- * 		2. Alternate post of primary language
- * 		3. Homapage of primary language
- *
- * @since  0.9.0
- * @access public
- * @param  array $options
- * @return bool
- */
+* @api{} Get MultiLang Slideshow
+* @apiName FgMultiLangGetSlideshow
+* @apiGroup FileGallery
+* @apiVersion 1.0.0
+* @apiDescription Get attachments that have 'slideshow' as media tag
+*
+* If there is no attachments with 'slideshow' media tag
+* It will look to its primary language. See below conditions in order:
+*
+* 1. Current post of current language
+* 2. Alternate post of primary language
+* 3. Homapage of primary language
+*
+* @apiParam {Array} [options] List of options to get attachments.
+* 	Refer to [Get Default Options](#api-FileGallery-FgGetOptions)
+*
+* @apiExample {php} Example Usage
+* 	$fg_attachments = rojak_fg_multilang_get_slideshow();
+* 	if ( $fg_attachments ) {
+* 		foreach ( $fg_attachments as $attachment ) {
+* 			...
+* 		}
+* 	}
+*/
 function rojak_fg_multilang_get_slideshow( $options = array() ) {
 	$default_options = rojak_fg_get_options();
 	$options = wp_parse_args( $options, $default_options );
@@ -56,17 +78,29 @@ function rojak_fg_multilang_get_slideshow( $options = array() ) {
 }
 
 /**
- * Get attachments of a post in either current post
- * or from the primary language of post
- * See below conditions in order:
- * 		1. Current post of current language
- * 		2. Alternate post of primary language
- *
- * @since  0.9.0
- * @access public
- * @param  array $options
- * @return bool
- */
+* @api{} Get MultiLang Post Attachments
+* @apiName FgMultiLangGetPostAttachments
+* @apiGroup FileGallery
+* @apiVersion 1.0.0
+* @apiDescription Get attachments of a post
+*
+* Get attachments of a post in either current post
+* or from the primary language of post
+* See below conditions in order:
+* 		1. Current post of current language
+* 		2. Alternate post of primary language
+*
+* @apiParam {Array} [options] List of options to get attachments.
+* 	Refer to [Get Default Options](#api-FileGallery-FgGetOptions)
+*
+* @apiExample {php} Example Usage
+* 	$fg_attachments = rojak_fg_multilang_get_post_attachments();
+* 	if ( $fg_attachments ) {
+* 		foreach ( $fg_attachments as $attachment ) {
+* 			...
+* 		}
+* 	}
+*/
 function rojak_fg_multilang_get_post_attachments( $options = array() ) {
 	$default_options = rojak_fg_get_options();
 	$options = wp_parse_args( $options, $default_options );
@@ -93,13 +127,18 @@ function rojak_fg_multilang_get_post_attachments( $options = array() ) {
 }
 
 /**
- * Get attachments of homepage or from the primary language homepage
- *
- * @since  0.9.0
- * @access public
- * @param  array $options
- * @return bool
- */
+* @api{} Get MultiLang Home Attachments
+* @apiName FgMultiLangGetHomeAttachments
+* @apiGroup FileGallery
+* @apiVersion 1.0.0
+* @apiDescription Get attachments of homepage or from the primary language homepage
+*
+* @apiParam {Array} [options] List of options to get attachments.
+* 	Refer to [Get Default Options](#api-FileGallery-FgGetOptions)
+*
+* @apiExample {php} Example Usage
+* 	$fg_attachments = rojak_fg_multilang_get_home_attachments();
+*/
 function rojak_fg_multilang_get_home_attachments( $options = array() ) {
 	$default_options = rojak_fg_get_options();
 	$options = wp_parse_args( $options, $default_options );
@@ -120,14 +159,19 @@ function rojak_fg_multilang_get_home_attachments( $options = array() ) {
 	return $attachments;
 }
 
-/*
- * Returns the post attachments
- *
- * @since  0.9.0
- * @access public
- * @param  array $options
- * @return object
- */
+/**
+* @api{} Get Post Attachments
+* @apiName FgGetPostAttachments
+* @apiGroup FileGallery
+* @apiVersion 1.0.0
+* @apiDescription Get post attachments
+*
+* @apiParam {Array} [options] List of options to get attachments.
+* 	Refer to [Get Default Options](#api-FileGallery-FgGetOptions)
+*
+* @apiExample {php} Example Usage
+* 	$fg_attachments = rojak_fg_get_attachments();
+*/
 function rojak_fg_get_attachments( $options = array() ) {
 	$default_options = rojak_fg_get_options();
 	$options = wp_parse_args( $options, $default_options );
@@ -147,13 +191,20 @@ function rojak_fg_get_attachments( $options = array() ) {
 }
 
 /**
- * Whether post has attachments with the specified media tag
- *
- * @since  0.9.0
- * @access public
- * @param  array $options
- * @return bool
- */
+* @api{} Has Attachments
+* @apiName FgHasAttachments
+* @apiGroup FileGallery
+* @apiVersion 1.0.0
+* @apiDescription Whether post has attachments with the specified media
+*
+* @apiParam {Array} [options] List of options to get attachments.
+* 	Refer to [Get Default Options](#api-FileGallery-FgGetOptions)
+*
+* @apiExample {php} Example Usage
+* 	if ( rojak_fg_has_attachments( $options ) ) {
+* 		...
+* 	}
+*/
 function rojak_fg_has_attachments( $options = array() ) {
 	$default_options = rojak_fg_get_options();
 	$options = wp_parse_args( $options, $default_options );
