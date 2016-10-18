@@ -1,4 +1,70 @@
 <?php
+/**
+* @api{} Templates i Intro
+* @apiName TemplatesIntro
+* @apiGroup AddThemeSupport
+* @apiVersion 1.0.0
+* @apiDescription Intro to Rojak Templates
+*
+* ## Example Usage
+*
+* ``` php
+* add_theme_support( 'rojak-templates' );
+* ```
+*
+* ---
+*
+* @apiExample Folder Structure
+* |-- templatenamehere/
+*     |-- img/
+*     |-- inc/
+*     |-- js/
+*         |-- _[partial].js              # js partial
+*         |-- _external.[name].js        # external js partial
+*         |-- [name].js                  # custom js
+*         |-- core.js                    # main js file
+*     |-- languages/                     # po/mo files
+*     |-- template-parts/                # php partials
+*     |-- scss/                          # scss partials
+*         |-- _base.[name].scss
+*         |-- _components.[name].scss
+*         |-- _external.[name].scss
+*         |-- _generic.[name].scss
+*         |-- _objects.[name].scss
+*         |-- _settings.[name].scss
+*         |-- _trumps.[name].scss
+*         |-- core.scss
+*     |-- tpl-[name]/
+*         |-- tpl-[name].scss
+*         |-- tpl-[name].js
+*         |-- tpl-[name].php
+*         |-- _tpl-[name]-[name].js      # partial js inside tpl
+*         |-- _tpl-[name]-[name].scss    # partial scss inside tpl
+*     |-- tpl-single-[name]/
+*         |-- tpl-single-[name].scss
+*         |-- tpl-single-[name].js
+*         |-- tpl-single-[name].php
+*
+*
+*
+* @apiExample Child Theme Support
+* |-- templatenamehere-childtheme/
+*     |-- style.css
+*     |-- custom.css
+*     |-- custom.js
+*     |-- screenshot.png
+*     |-- functions.php
+*     |-- img/
+*         |-- logo.svg
+*     |-- template-parts/
+*         |-- [partial].php
+*     |-- tpl-[name]/
+*         |-- tpl-[name].css
+*         |-- tpl-[name].js
+*         |-- tpl-[name].php
+*
+*
+*/
 
 if ( current_theme_supports( 'rojak-templates-minify' ) ) {
 	$GLOBALS['rojak_templates_minify'] = '.min';
@@ -18,9 +84,33 @@ function rojak_tpl_core_assets() {
 	rojak_tpl_core_js();
 }
 
+
 /**
- * Base scripts
- */
+* @api{} Templates ii Core JS
+* @apiName TemplatesCoreJS
+* @apiGroup AddThemeSupport
+* @apiVersion 1.0.0
+* @apiDescription Core JS
+*
+* @apiExample {php} Example
+* add_action( 'rojak_tpl_before_jquery_js',  function(){
+*   wp_enqueue_script('new-script', $url, array(), '', true );
+* });
+*
+* add_action( 'rojak_tpl_after_jquery_js',  function(){
+*   wp_enqueue_script('new-script', $url, array(), '', true );
+* });
+*
+* add_action( 'rojak_tpl_before_core_js',  function(){
+*   wp_enqueue_script('new-script', $url, array(), '', true );
+* });
+*
+* add_action( 'rojak_tpl_after_core_js',  function(){
+*   wp_enqueue_script('new-script', $url, array(), '', true );
+* });
+*
+*
+*/
 function rojak_tpl_core_js() {
 
 	do_action('rojak_tpl_before_jquery_js');
@@ -38,27 +128,28 @@ function rojak_tpl_core_js() {
 }
 
 /**
- * Base stylesheet
- */
+* @api{} Templates iii Core CSS
+* @apiName TemplatesCoreCSS
+* @apiGroup AddThemeSupport
+* @apiVersion 1.0.0
+* @apiDescription Core CSS
+*
+* @apiExample {php} Example
+* add_action( 'rojak_tpl_before_core_css', function(){
+*   wp_enqueue_style('new-script', $url );
+* });
+*
+* add_action( 'rojak_tpl_after_core_css', function(){
+*   wp_enqueue_style('new-script', $url );
+* });
+*
+*/
 function rojak_tpl_core_css() {
 	$style_name = 'core' . $GLOBALS['rojak_templates_minify'] . '.css';
 	do_action('rojak_tpl_before_core_css');
 	wp_enqueue_style( 'rojak', ROJAK_PARENT_URI . $style_name );
 	do_action('rojak_tpl_after_core_css');
 }
-
-
-/**
- * Custom stylesheet for child themes
- */
-function rojak_tpl_core_custom_css() {
-	$custom_css      = 'custom.css';
-	$custom_css_path = ROJAK_CHILD . $custom_css;
-	if ( file_exists( $custom_css_path ) && is_child_theme() ) {
-		wp_enqueue_style( 'rojak-custom', ROJAK_CHILD_URI . $custom_css );
-	}
-}
-add_action( 'rojak_tpl_after_core_css', 'rojak_tpl_core_custom_css' );
 
 
 /**
@@ -72,6 +163,19 @@ function rojak_tpl_core_custom_js() {
 	}
 }
 add_action( 'rojak_tpl_after_core_js', 'rojak_tpl_core_custom_js' );
+
+
+/**
+ * Custom stylesheet for child themes
+ */
+function rojak_tpl_core_custom_css() {
+	$custom_css      = 'custom.css';
+	$custom_css_path = ROJAK_CHILD . $custom_css;
+	if ( file_exists( $custom_css_path ) && is_child_theme() ) {
+		wp_enqueue_style( 'rojak-custom', ROJAK_CHILD_URI . $custom_css );
+	}
+}
+add_action( 'rojak_tpl_after_core_css', 'rojak_tpl_core_custom_css' );
 
 
 /**
@@ -161,7 +265,6 @@ function rojak_tpl_page_fn() {
 	}
 }
 
-
 function rojak_tpl_page_css( $name, $path ) {
 	if ( is_file( $path . $GLOBALS['rojak_templates_minify'] . '.css' ) ) {
 		do_action('rojak_tpl_before_page_css');
@@ -182,30 +285,11 @@ function rojak_tpl_page_react_js( $name, $path ) {
 	$react_bundle     = 'react-bundle';
 	$react_bundle_ext = "-{$react_bundle}.js";
 	if ( is_file( $path . $react_bundle_ext ) ) {
-		// [jes]: injecting react and react dom separately creates
-		// issue with included react components
-		// will investigate further
-		// -------------------------------------------------------------
-		// do_action('rojak_tpl_before_react_js');
-		// wp_dequeue_script(    'react' );
-		// wp_deregister_script( 'react' );
-		// wp_register_script(   'react', '//cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react' .$GLOBALS['rojak_templates_minify']. '.js', array(), '15.2.1', true );
-		// wp_enqueue_script(    'react' );
-		// do_action('rojak_tpl_after_react_js');
-
-		// do_action('rojak_tpl_before_react_dom_js');
-		// wp_dequeue_script(    'react-dom' );
-		// wp_deregister_script( 'react-dom' );
-		// wp_register_script(   'react-dom', '//cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom' .$GLOBALS['rojak_templates_minify']. '.js', array(), '15.2.1', true );
-		// wp_enqueue_script(    'react-dom' );
-		// do_action('rojak_tpl_after_react_dom_js');
-
 		do_action('rojak_tpl_before_page_react_bundle_js');
 		wp_enqueue_script( $name . $react_bundle, ROJAK_PARENT_URI . rojak_tpl_get_path( $name, $react_bundle_ext ), array(), '', true  );
 		do_action('rojak_tpl_after_page_react_bundle_js');
 	}
 }
-
 
 /**
  * Custom assets for page templates and single templates
@@ -225,7 +309,6 @@ function rojak_tpl_page_custom( $name ) {
 	}
 
 }
-
 
 function rojak_tpl_require_tpl_fn( $name ) {
 

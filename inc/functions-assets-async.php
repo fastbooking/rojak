@@ -1,4 +1,34 @@
 <?php
+/**
+* @api{} Asset Async
+* @apiName AssetAsync
+* @apiGroup AddThemeSupport
+* @apiVersion 1.0.0
+* @apiDescription Make all assets (css and js) enqueue async
+*
+* - functions can be overridden in the theme by redeclaring the function
+*
+* ---
+*
+* ## CSS
+* - Code inspired mainly from from __WP Async CSS__ https://wordpress.org/plugins/wp-async-css/
+* - This feature uses https://github.com/filamentgroup/loadCSS
+* - Install in bower, `bower install loadcss --save`
+* - Include in js `#=include ../../bower/loadcss/src/loadCSS.js`
+*
+* ---
+*
+* ## Javascript
+* - Code inspired mainly from from __Async JavaScript__ https://wordpress.org/plugins/async-javascript
+* - Adds _"defer"_ on all script using wp_enqueue_script()
+*
+* ---
+*
+* @apiExample {php} Example Usage
+* // functions.php
+* add_theme_support( 'rojak-assets-async' );
+*
+*/
 
 // Add the actions only if NOT Admin
 if( false === is_admin() ) {
@@ -9,11 +39,6 @@ if( false === is_admin() ) {
 add_filter( 'clean_url', 'rojak_defer_js', 11 );
 
 
-/**
- * Async CSS
- *
- * Code inspired mainly from from https://wordpress.org/plugins/wp-async-css/
- */
 if ( ! function_exists( 'rojak_async_loadcss_js' ) ) {
 	function rojak_async_loadcss_js() {
 		// Get loadCSS-file
@@ -40,12 +65,6 @@ if ( ! function_exists( 'rojak_async_loadcss' ) ) {
 	}
 }
 
-
-/**
- * Async JS
- *
- * Code inspired mainly from from https://wordpress.org/plugins/async-javascript/
- */
 if ( ! function_exists( 'rojak_defer_js' ) ) {
 	function rojak_defer_js( $url ) {
 		$aj_enabled       = true;

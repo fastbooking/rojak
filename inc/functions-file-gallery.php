@@ -1,16 +1,5 @@
 <?php
 /**
- * Functions for handling File Gallery attachments
- *
- * @package    Rojak
- * @subpackage Includes
- * @author     Fastbooking <studioweb-fb@fastbooking.net>
- * @copyright  Copyright (c) 2016, Fastbooking
- * @link
- * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- */
-
-/**
 * @api{} Get Default Options
 * @apiName FgGetOptions
 * @apiGroup FileGallery
@@ -37,7 +26,7 @@ function rojak_fg_get_options() {
 }
 
 /**
-* @api{} Get MultiLang Slideshow
+* @api{} Get ML Slideshow
 * @apiName FgMultiLangGetSlideshow
 * @apiGroup FileGallery
 * @apiVersion 1.0.0
@@ -78,7 +67,7 @@ function rojak_fg_multilang_get_slideshow( $options = array() ) {
 }
 
 /**
-* @api{} Get MultiLang Post Attachments
+* @api{} Get ML Post Attachments
 * @apiName FgMultiLangGetPostAttachments
 * @apiGroup FileGallery
 * @apiVersion 1.0.0
@@ -87,8 +76,9 @@ function rojak_fg_multilang_get_slideshow( $options = array() ) {
 * Get attachments of a post in either current post
 * or from the primary language of post
 * See below conditions in order:
-* 		1. Current post of current language
-* 		2. Alternate post of primary language
+*
+* 1. Current post of current language
+* 2. Alternate post of primary language
 *
 * @apiParam {Array} [options] List of options to get attachments.
 * 	Refer to [Get Default Options](#api-FileGallery-FgGetOptions)
@@ -127,7 +117,7 @@ function rojak_fg_multilang_get_post_attachments( $options = array() ) {
 }
 
 /**
-* @api{} Get MultiLang Home Attachments
+* @api{} Get ML Home Attachments
 * @apiName FgMultiLangGetHomeAttachments
 * @apiGroup FileGallery
 * @apiVersion 1.0.0

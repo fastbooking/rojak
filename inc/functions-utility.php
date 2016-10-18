@@ -18,6 +18,19 @@
 * @apiVersion 1.0.0
 * @apiDescription Checks if array is empty
 *
+* ---
+*
+* ## Return Values
+* Loops inside the array and uses empty() to check value.
+*
+* Returns FALSE if var exists and has a non-empty, non-zero value. Otherwise returns TRUE.
+*
+* The following things are considered to be empty:
+* - array() (an empty array)
+* - array(0) (an empty array with empty value)
+*
+* ---
+*
 * @apiParam {Array} arr Array to be checked
 *
 * @apiExample {php} Example Usage
@@ -28,7 +41,7 @@
 function rojak_empty_array( $arr ) {
 	if ( is_array( $arr ) ) {
 		foreach ( $arr as $elm ) {
-			if( !empty( $elm ) ) {
+			if( ! empty( $elm ) ) {
 				return false;
 			}
 		}
@@ -42,6 +55,19 @@ function rojak_empty_array( $arr ) {
 * @apiGroup Array
 * @apiVersion 1.0.0
 * @apiDescription Check if object is empty
+*
+* ---
+*
+* ## Return Values
+* Casts object to array then loops inside which uses empty() to check value.
+*
+* Returns FALSE if var exists and has a non-empty, non-zero value. Otherwise returns TRUE.
+*
+* The following things are considered to be empty:
+* - new stdClass() (an empty object)
+*
+* ---
+*
 *
 * @apiParam {Object} obj Object to be checked
 *
