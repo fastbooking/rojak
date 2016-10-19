@@ -18,6 +18,9 @@
 * |-- templatenamehere/
 *     |-- img/
 *     |-- inc/
+*         |-- class-[name].php           # PHP classes
+*         |-- functions-[name].php       # function specific
+*         |-- save-[name].php            # on save functions
 *     |-- js/
 *         |-- _[partial].js              # js partial
 *         |-- _external.[name].js        # external js partial
@@ -25,6 +28,10 @@
 *         |-- core.js                    # main js file
 *     |-- languages/                     # po/mo files
 *     |-- template-parts/                # php partials
+*         |-- footer-[name].php
+*         |-- header-[name].php
+*         |-- slideshow-[name].php
+*         |-- home-[name].php
 *     |-- scss/                          # scss partials
 *         |-- _base.[name].scss
 *         |-- _components.[name].scss
@@ -33,7 +40,7 @@
 *         |-- _objects.[name].scss
 *         |-- _settings.[name].scss
 *         |-- _trumps.[name].scss
-*         |-- core.scss
+*         |-- core.scss                  # main css file
 *     |-- tpl-[name]/
 *         |-- tpl-[name].scss
 *         |-- tpl-[name].js
@@ -43,9 +50,7 @@
 *     |-- tpl-single-[name]/
 *         |-- tpl-single-[name].scss
 *         |-- tpl-single-[name].js
-*         |-- tpl-single-[name].php
-*
-*
+*         |-- tpl-single-[name].php*
 *
 * @apiExample Child Theme Support
 * |-- templatenamehere-childtheme/
@@ -61,8 +66,7 @@
 *     |-- tpl-[name]/
 *         |-- tpl-[name].css
 *         |-- tpl-[name].js
-*         |-- tpl-[name].php
-*
+*         |-- tpl-[name].php*
 *
 */
 
@@ -86,29 +90,70 @@ function rojak_tpl_core_assets() {
 
 
 /**
-* @api{} Templates ii Core JS
-* @apiName TemplatesCoreJS
+* @api{} Templates ii Enqueue Assets
+* @apiName TemplatesEnqueueAssets
 * @apiGroup AddThemeSupport
 * @apiVersion 1.0.0
-* @apiDescription Core JS
+* @apiDescription Enqueue Assets
 *
 * @apiExample {php} Example
+* // ---------------------------------------
+* // Enqueue JS
+* // ---------------------------------------
+*
+* // jQuery
 * add_action( 'rojak_tpl_before_jquery_js',  function(){
-*   wp_enqueue_script('new-script', $url, array(), '', true );
+*   wp_enqueue_script('new-js', $url, array(), '', true );
 * });
-*
 * add_action( 'rojak_tpl_after_jquery_js',  function(){
-*   wp_enqueue_script('new-script', $url, array(), '', true );
+*   wp_enqueue_script('new-js', $url, array(), '', true );
 * });
 *
+* // core.js
 * add_action( 'rojak_tpl_before_core_js',  function(){
-*   wp_enqueue_script('new-script', $url, array(), '', true );
+*   wp_enqueue_script('new-js', $url, array(), '', true );
 * });
-*
 * add_action( 'rojak_tpl_after_core_js',  function(){
-*   wp_enqueue_script('new-script', $url, array(), '', true );
+*   wp_enqueue_script('new-js', $url, array(), '', true );
 * });
 *
+* // tpl-[name]/tpl-[name].js
+* // tpl-single-[name]/tpl-single-[name].js
+* add_action( 'rojak_tpl_before_page_js',  function(){
+*   wp_enqueue_script('new-js', $url, array(), '', true );
+* });
+* add_action( 'rojak_tpl_after_page_js',  function(){
+*   wp_enqueue_script('new-js', $url, array(), '', true );
+* });
+*
+* // ---------------------------------------
+* // Enqueue CSS
+* // ---------------------------------------
+*
+* // core.css
+* add_action( 'rojak_tpl_before_core_css', function(){
+*   wp_enqueue_style('new-css', $url );
+* });
+* add_action( 'rojak_tpl_after_core_css', function(){
+*   wp_enqueue_style('new-css', $url );
+* });
+*
+* // core.css
+* add_action( 'rojak_tpl_before_core_css', function(){
+*   wp_enqueue_style('new-css', $url );
+* });
+* add_action( 'rojak_tpl_after_core_css', function(){
+*   wp_enqueue_style('new-css', $url );
+* });
+*
+* // tpl-[name]/tpl-[name].css
+* // tpl-single-[name]/tpl-single-[name].css
+* add_action( 'rojak_tpl_before_page_css', function(){
+*   wp_enqueue_style('new-css', $url );
+* });
+* add_action( 'rojak_tpl_after_page_css', function(){
+*   wp_enqueue_style('new-css', $url );
+* });
 *
 */
 function rojak_tpl_core_js() {
@@ -127,23 +172,7 @@ function rojak_tpl_core_js() {
 
 }
 
-/**
-* @api{} Templates iii Core CSS
-* @apiName TemplatesCoreCSS
-* @apiGroup AddThemeSupport
-* @apiVersion 1.0.0
-* @apiDescription Core CSS
-*
-* @apiExample {php} Example
-* add_action( 'rojak_tpl_before_core_css', function(){
-*   wp_enqueue_style('new-script', $url );
-* });
-*
-* add_action( 'rojak_tpl_after_core_css', function(){
-*   wp_enqueue_style('new-script', $url );
-* });
-*
-*/
+
 function rojak_tpl_core_css() {
 	$style_name = 'core' . $GLOBALS['rojak_templates_minify'] . '.css';
 	do_action('rojak_tpl_before_core_css');
