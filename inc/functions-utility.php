@@ -85,14 +85,33 @@ function rojak_empty_object( $obj ) {
 }
 
 /**
- * Check if string contains $needle
- *
- * @since  0.9.0
- * @access public
- * @param  string   $haystack
- * @param  string   $needle
- * @return bool
- */
+* @api{} String Contains
+* @apiName StringContains
+* @apiGroup String
+* @apiVersion 1.0.0
+* @apiDescription Check if string contains $needle
+*
+* ---
+*
+* ## Return Values
+*
+* - Returns FALSE if the needle was not found.
+* - TRUE if found.
+*
+* ---
+*
+* @apiParam {String} haystack The string to search in.
+* @apiParam {String} needle The string to find.
+*
+* @apiExample {php} Example Usage
+* $mystring = 'abc';
+* $findme   = 'a';
+* if ( rojak_str_contains( $mystring, $findme ) ) {
+*   echo "The string '$findme' was found in the string '$mystring'";
+* } else {
+*   echo "The string '$findme' was NOT found in the string '$mystring'";
+* }
+*/
 function rojak_str_contains( $haystack, $needle ) {
 	if ( strpos( $haystack, $needle ) !== false ) {
 		return true;
@@ -101,28 +120,67 @@ function rojak_str_contains( $haystack, $needle ) {
 }
 
 /**
- * Check if string starts with $needle
- *
- * @since  0.9.0
- * @access public
- * @param  string   $haystack
- * @param  string   $needle
- * @return bool
- */
+* @api{} String Starts With
+* @apiName StringStartsWith
+* @apiGroup String
+* @apiVersion 1.0.0
+* @apiDescription Check if string starts with $needle
+*
+* ---
+*
+* ## Return Values
+*
+* - Returns FALSE if the needle was not found.
+* - TRUE if found.
+*
+* ---
+*
+* @apiParam {String} haystack The string to search in.
+* @apiParam {String} needle The string to find.
+*
+* @apiExample {php} Example Usage
+* $mystring = 'abc';
+* $findme   = 'a';
+* if ( rojak_str_starts_with( $mystring, $findme ) ) {
+*   echo "The string '$findme' was found at the start of string '$mystring'";
+* } else {
+*   echo "The string '$findme' was NOT found at the start of string '$mystring'";
+* }
+*/
 function rojak_str_starts_with( $haystack, $needle ) {
 	$length = strlen($needle);
 	return (substr($haystack, 0, $length) === $needle);
 }
 
+
 /**
- * Check if string ends with $needle
- *
- * @since  0.9.0
- * @access public
- * @param  string   $haystack
- * @param  string   $needle
- * @return bool
- */
+* @api{} String Ends With
+* @apiName StringEndsWith
+* @apiGroup String
+* @apiVersion 1.0.0
+* @apiDescription Check if string ends with $needle
+*
+* ---
+*
+* ## Return Values
+*
+* - Returns FALSE if the needle was not found.
+* - TRUE if found.
+*
+* ---
+*
+* @apiParam {String} haystack The string to search in.
+* @apiParam {String} needle The string to find.
+*
+* @apiExample {php} Example Usage
+* $mystring = 'abc';
+* $findme   = 'a';
+* if ( rojak_str_ends_with( $mystring, $findme ) ) {
+*   echo "The string '$findme' was found at the end of string '$mystring'";
+* } else {
+*   echo "The string '$findme' was NOT found at the end of string '$mystring'";
+* }
+*/
 function rojak_str_ends_with( $haystack, $needle ) {
 	$length = strlen($needle);
 	if ($length == 0) {
@@ -132,13 +190,29 @@ function rojak_str_ends_with( $haystack, $needle ) {
 }
 
 /**
- * Get page id based on page template
- *
- * @since  0.9.0
- * @access public
- * @param  string   $tpl_name
- * @return bool
- */
+* @api{} Get PageID by PageTemplate
+* @apiName GetPageIDByPageTemplate
+* @apiGroup Post
+* @apiVersion 1.0.0
+* @apiDescription Get page id based on page template
+*
+* ---
+*
+* ## Return Values
+*
+* - Returns the $post->ID if found.
+* - Returns FALSE if not found.
+*
+* ---
+*
+* @apiParam {String} tpl_name The string to search in.
+*
+* @apiExample {php} Example Usage
+* $tpl_id = rojak_get_page_id_by_tpl( 'tpl-pagetemplate' );
+* if ( ! empty( $tpl_id ) ) {
+*   ...
+* }
+*/
 function rojak_get_page_id_by_tpl( $tpl_name ) {
 	$page_id = false;
 	$args = array(
@@ -172,13 +246,29 @@ function rojak_get_page_id_by_tpl( $tpl_name ) {
 }
 
 /**
- * Get the parent's page id based on give page id
- *
- * @since  0.9.0
- * @access public
- * @param  int   $page_id
- * @return bool
- */
+* @api{} Get Parent PageID
+* @apiName GetParentPageID
+* @apiGroup Post
+* @apiVersion 1.0.0
+* @apiDescription Get the parent's page id based on give page id
+*
+* ---
+*
+* ## Return Values
+*
+* - Returns the $post->ID if found.
+* - Returns FALSE if not found.
+*
+* ---
+*
+* @apiParam {Integer} page_id Page ID.
+*
+* @apiExample {php} Example Usage
+* $parent_id = rojak_get_parent_page_id( $post->ID );
+* if ( $parent_id )
+*   ...
+* }
+*/
 function rojak_get_parent_page_id( $page_id ) {
 	$page = get_post( $page_id );
 	if ( $page->post_parent ) {
@@ -191,13 +281,26 @@ function rojak_get_parent_page_id( $page_id ) {
 }
 
 /**
- * Get menu name based on menu's theme location
- *
- * @since  0.9.0
- * @access public
- * @param  string   $theme_location
- * @return string
- */
+* @api{} Get Menu Name
+* @apiName GetMenuName
+* @apiGroup Post
+* @apiVersion 1.0.0
+* @apiDescription Get menu name based on menu's theme location
+*
+* ---
+*
+* ## Return Values
+*
+* - Returns the $menu_obj->name if found.
+* - Returns FALSE if not found.
+*
+* ---
+*
+* @apiParam {String} theme_location Menu location name. E.g. 'primary'
+*
+* @apiExample {php} Example Usage
+* echo rojak_get_menu_name( 'primary' );
+*/
 function rojak_get_menu_name( $theme_location ) {
 	if ( ! $theme_location ) {
 		return false;
@@ -217,18 +320,6 @@ function rojak_get_menu_name( $theme_location ) {
 	}
 
 	return $menu_obj->name;
-}
-
-/**
- * Print
- *
- * @since  0.9.0
- * @access public
- * @param  any   $print_this
- * @return void
- */
-function rojak_print( $print_this )	{
-	echo '<pre style="position:fixed; width:1000px; height:800px; background-color:#000; color:#fff; z-index:9999; top:20px; right:0; overflow:scroll; font-size:12px; ">' . print_r( $print_this, true ) . '</pre>';
 }
 
 /**
@@ -260,19 +351,41 @@ function rojak_get_post_meta_object( $post_id, $field_name ) {
 }
 
 /**
+* @api{} Print To View
+* @apiName PrintToView
+* @apiGroup Print
+* @apiVersion 1.0.0
+* @apiDescription Prints data in view
+*
+* @apiParam {Mixed} print_this The data to be shown
+*
+* @apiExample {php} Example Usage
+* rojak_print( array( 'name' => 'John Doe' ) );
+*/
+/**
+ * Print
+ *
+ * @since  0.9.0
+ * @access public
+ * @param  any   $print_this
+ * @return void
+ */
+function rojak_print( $print_this )	{
+	echo '<pre style="position:fixed; width:1000px; height:800px; background-color:#000; color:#fff; z-index:9999; top:20px; right:0; overflow:scroll; font-size:12px; ">' . print_r( $print_this, true ) . '</pre>';
+}
+
+/**
 * @api{} Print To Console
 * @apiName PrintToConsole
 * @apiGroup Print
 * @apiVersion 1.0.0
 * @apiDescription Prints data to window console
 *
-* Refer to http://php.net/manual/en/function.array-column.php
-*
 * @apiParam {Mixed} data The data to be shown on console
-* @apiParam {Boolean} public If set to true, logs will not be shown for non-login users
+* @apiParam {Boolean} [public] If set to `true`, logs will not be shown for non-login users. Default `false`.
 *
 * @apiExample {php} Example Usage
-*      rojak_console( array( 'name' => 'John Doe' ) );
+* rojak_console( array( 'name' => 'John Doe' ) );
 */
 function rojak_console( $data, $public = false ) {
 	if ( $public == true || is_user_logged_in() ) {

@@ -11,14 +11,27 @@
  */
 
 /**
- * Returns the default language post ID
- *
- * @since  0.9.0
- * @access public
- * @param  int     $post_id
- * @param  string  $post_type
- * @return int
- */
+* @api{} Get PrimaryLang PostID
+* @apiName GetPrimaryLangPostID
+* @apiGroup Post
+* @apiVersion 1.0.0
+* @apiDescription Returns the primary language post ID
+*
+* ---
+*
+* ## Return Values
+*
+* - Returns the primary language $post_id if found.
+* - Returns current $post_id if not found.
+*
+* ---
+*
+* @apiParam {Integer} post_id Post ID
+* @apiParam {String} [post_type] If custom post type then need to set the correct post type naem. Default is `'page'`.
+*
+* @apiExample {php} Example Usage
+* $primary_post_id = rojak_get_primary_lang_post_id( $offer->post->ID, 'offer' );
+*/
 function rojak_get_primary_lang_post_id( $post_id, $post_type = 'page' ) {
 
 	global $sitepress;
