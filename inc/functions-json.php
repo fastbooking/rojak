@@ -3,7 +3,7 @@
 function rojak_get_json_root_dir( ) {
 	$theme_name  = get_template();
 	$json_dir    = trailingslashit( WP_CONTENT_DIR );
-	$json_dir   .= trailingslashit( "$theme_name-json" );
+	$json_dir   .= trailingslashit( "sebel-json" );
 	return $json_dir;
 }
 
@@ -13,7 +13,7 @@ function rojak_get_json_site_dir( $custom_dir_name = null ) {
 
 	// set default json dir as theme name
 	$theme_name = get_template();
-	$json_dir   = trailingslashit( "$theme_name-json" );
+	$json_dir   = trailingslashit( "sebel-json" );
 
 	// if $theme_name is not the intended directory
 	$json_dir = apply_filters( 'rojak_json_dir', $json_dir );
