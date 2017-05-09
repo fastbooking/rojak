@@ -1,22 +1,28 @@
 <?php
+function rojak_get_json_dir_location ( $alt = false ) {
+	if ( $alt ) {
+		return "the-sebel-json";
+	}
+	return "sebel-json";
+}
 
-function rojak_get_json_root_dir( ) {
+function rojak_get_json_root_dir( $alt = false ) {
 	$theme_name  = get_template();
 	$json_dir    = trailingslashit( WP_CONTENT_DIR );
-	$json_dir   .= trailingslashit( "sebel-json" );
+	$json_dir   .= trailingslashit( rojak_get_json_dir_location( $alt ) );
 	return $json_dir;
 }
 
 
-function rojak_get_json_site_dir( $custom_dir_name = null ) {
+function rojak_get_json_site_dir( $custom_dir_name = null, $alt = false ) {
 	$current_site_id = get_current_blog_id();
 
 	// set default json dir as theme name
 	$theme_name = get_template();
-	$json_dir   = trailingslashit( "sebel-json" );
+	$json_dir   = trailingslashit( rojak_get_json_dir_location( $alt ) );
 
 	// if $theme_name is not the intended directory
-	$json_dir = apply_filters( 'rojak_json_dir', $json_dir );
+	// $json_dir = apply_filters( 'rojak_json_dir', $json_dir );
 
 	$json_path  = $json_dir . $current_site_id;
 	if ( ! empty( $custom_dir_name ) ) {
