@@ -1,9 +1,13 @@
 <?php
 function rojak_get_json_dir_location ( $alt = false ) {
-	if ( $alt ) {
-		return "the-sebel-json";
+	if (sebel_use_cms_generated_json()) {
+		return "sebel-json-cms";
+	} else {
+		if ( $alt ) {
+			return "the-sebel-json";
+		}
+		return "sebel-json";
 	}
-	return "sebel-json";
 }
 
 function rojak_get_json_root_dir( $alt = false ) {
